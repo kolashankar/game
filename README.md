@@ -86,8 +86,8 @@ VITE_SOCKET_URL=http://localhost:5000
 
 #### AI Engine (.env)
 ```
-OPENAI_API_KEY=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
-PINECONE_API_KEY=pcsk_7WpcGs_3ZsLrAPSsQEqSSKnpcMfWLbVkCdXJdXimJK12gERysmDs1V6MpZPxmEpDA5jnZc
+OPENAI_API_KEY=
+PINECONE_API_KEY=
 PINECONE_ENVIRONMENT=your_pinecone_environment
 ```
 
