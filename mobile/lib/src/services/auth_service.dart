@@ -10,7 +10,7 @@ class AuthService {
   final String baseUrl;
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
   
-  AuthService({String? baseUrl}) : this.baseUrl = baseUrl ?? dotenv.env['API_URL'] ?? 'http://localhost:5000/api';
+  AuthService({String? baseUrl}) : this.baseUrl = baseUrl ?? dotenv.env['API_URL'] ?? 'https://game-ujiz.onrender.com/api';
 
   // Register a new user
   Future<User> register(String username, String email, String password, String preferredRole) async {

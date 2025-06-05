@@ -146,7 +146,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       const token = localStorage.getItem('token');
       
       if (token) {
-        const socketInstance = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000', {
+        const socketInstance = io(import.meta.env.VITE_SOCKET_URL || 'https://game-ujiz.onrender.com', {
           auth: { token }
         });
         

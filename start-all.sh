@@ -18,9 +18,9 @@ if command -v docker &> /dev/null && command -v docker-compose &> /dev/null; the
         docker-compose up -d
         echo ""
         echo "Services started! Access the application at:"
-        echo "- Frontend: http://localhost:3000"
-        echo "- Backend API: http://localhost:5000"
-        echo "- AI Engine: http://localhost:8000"
+        echo "- Frontend: https://game-frontend-7455.onrender.com"
+        echo "- Backend API: https://game-ujiz.onrender.com"
+        echo "- AI Engine: https://game-ai-engine.onrender.com"
         exit 0
     fi
 else
@@ -62,9 +62,9 @@ start_service "Frontend" "start-frontend.sh"
 
 echo ""
 echo "All services started! Access the application at:"
-echo "- Frontend: http://localhost:3000"
-echo "- Backend API: http://localhost:5000"
-echo "- AI Engine: http://localhost:8000"
+echo "- Frontend: https://game-frontend-7455.onrender.com"
+echo "- Backend API: https://game-ujiz.onrender.com"
+echo "- AI Engine: https://game-ai-engine.onrender.com"
 echo ""
 echo "Note: Check the terminal windows for each service for logs and errors."
 echo "Press Ctrl+C in each terminal to stop the services."

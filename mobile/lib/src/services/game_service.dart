@@ -13,7 +13,7 @@ class GameService {
   final AuthService _authService;
   
   GameService({String? baseUrl, AuthService? authService}) 
-      : this.baseUrl = baseUrl ?? dotenv.env['API_URL'] ?? 'http://localhost:5000/api',
+      : this.baseUrl = baseUrl ?? dotenv.env['API_URL'] ?? 'https://game-ujiz.onrender.com/api',
         this._authService = authService ?? AuthService();
 
   // Get headers with auth token

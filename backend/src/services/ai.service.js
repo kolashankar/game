@@ -8,7 +8,7 @@ const logger = require('../utils/logger');
 
 class AIService {
   constructor() {
-    this.baseUrl = process.env.AI_ENGINE_URL || 'http://localhost:8000';
+    this.baseUrl = process.env.AI_ENGINE_URL || 'https://game-ai-engine.onrender.com';
     this.apiKey = process.env.AI_ENGINE_API_KEY;
   }
 

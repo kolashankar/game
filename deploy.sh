@@ -137,9 +137,9 @@ if [[ "$1" == "-b" || "$1" == "--build" || "$1" == "-u" || "$1" == "--up" || -z 
     
     # Print access URLs
     echo -e "${GREEN}Access URLs:${NC}"
-    echo "Frontend:   http://localhost:3000"
-    echo "Backend API: http://localhost:5000"
-    echo "AI Engine API: http://localhost:8000"
+    echo "Frontend:   https://game-frontend-7455.onrender.com"
+    echo "Backend API: https://game-ujiz.onrender.com"
+    echo "AI Engine API: https://game-ai-engine.onrender.com"
     echo "====================================================="
     
     echo -e "${GREEN}Deployment complete!${NC}"

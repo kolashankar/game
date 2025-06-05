@@ -75,13 +75,13 @@ POSTGRES_DB=postgres
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=root
 POSTGRES_HOST=localhost
-AI_ENGINE_URL=http://localhost:8000
+AI_ENGINE_URL=https://game-ai-engine.onrender.com
 ```
 
 #### Frontend (.env.local)
 ```
-VITE_API_URL=http://localhost:5000
-VITE_SOCKET_URL=http://localhost:5000
+VITE_API_URL=https://game-ujiz.onrender.com
+VITE_SOCKET_URL=https://game-ujiz.onrender.com
 ```
 
 #### AI Engine (.env)
@@ -118,7 +118,7 @@ cd frontend
 npm install
 npm run dev
 ```
-The frontend will be available at http://localhost:3000
+The frontend will be available at https://game-frontend-7455.onrender.com
 
 **Backend**
 ```bash
@@ -126,7 +126,7 @@ cd backend
 npm install
 npm run dev
 ```
-The backend API will be available at http://localhost:5000
+The backend API will be available at https://game-ujiz.onrender.com
 
 **AI Engine**
 ```bash
@@ -134,7 +134,7 @@ cd ai-engine
 pip install -r requirements.txt
 python main.py
 ```
-The AI Engine will be available at http://localhost:8000
+The AI Engine will be available at https://game-ai-engine.onrender.com
 
 **Mobile App**
 ```bash

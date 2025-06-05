@@ -18,8 +18,8 @@ Future<void> main() async {
   await dotenv.load(fileName: ".env");
   
   // Configure services with correct API endpoints
-  final authService = AuthService(baseUrl: 'http://localhost:5000/api');
-  final gameService = GameService(baseUrl: 'http://localhost:5000/api');
+  final authService = AuthService(baseUrl: 'https://game-ujiz.onrender.com/api');
+  final gameService = GameService(baseUrl: 'https://game-ujiz.onrender.com/api');
   
   // Initialize Google Fonts
   GoogleFonts.config.allowRuntimeFetching = true;

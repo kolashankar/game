@@ -49,7 +49,7 @@ class SocketService {
   // Initialize socket connection
   void init(String token) {
     try {
-      final socketUrl = dotenv.env['SOCKET_URL'] ?? 'http://localhost:5000';
+      final socketUrl = dotenv.env['SOCKET_URL'] ?? 'https://game-ujiz.onrender.com';
       
       _socket = io.io(
         socketUrl,

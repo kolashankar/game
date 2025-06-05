@@ -15,7 +15,7 @@ export const initSocket = (token) => {
   }
 
   // Create new socket connection
-  socket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000', {
+  socket = io(import.meta.env.VITE_SOCKET_URL || 'https://game-ujiz.onrender.com', {
     auth: {
       token
     },

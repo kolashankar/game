@@ -12,7 +12,7 @@ import '../utils/api_exception.dart';
 import 'auth_service.dart';
 
 class ARService {
-  final String baseUrl = dotenv.env['API_URL'] ?? 'http://localhost:5000/api';
+  final String baseUrl = dotenv.env['API_URL'] ?? 'https://game-ujiz.onrender.com/api';
   final AuthService _authService = AuthService();
   
   // Get headers with auth token
