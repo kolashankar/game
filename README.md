@@ -69,8 +69,8 @@ Create the following `.env` files for each component:
 #### Backend (.env)
 ```
 PORT=5000
-JWT_SECRET=your_jwt_secret_key
-MONGODB_URI=mongodb+srv://kolashankar113:***REMOVED***@cluster0.zfgsqlm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+JWT_SECRET=
+MONGODB_URI=
 POSTGRES_DB=postgres
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=root
