@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400px" height="300px" viewBox="0 0 400 300" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Panel Background</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="panelGradient">
+            <stop stop-color="#1E293B" offset="0%"></stop>
+            <stop stop-color="#0F172A" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="borderGradient">
+            <stop stop-color="#4F46E5" offset="0%"></stop>
+            <stop stop-color="#8B5CF6" offset="50%"></stop>
+            <stop stop-color="#EC4899" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Panel Background -->
+        <rect fill="url(#panelGradient)" x="5" y="5" width="390" height="290" rx="10"></rect>
+        
+        <!-- Panel Border -->
+        <rect stroke="url(#borderGradient)" stroke-width="1" opacity="0.7" x="5" y="5" width="390" height="290" rx="10"></rect>
+        
+        <!-- Header Area -->
+        <rect fill="#0F172A" x="5" y="5" width="390" height="40" rx="10 10 0 0"></rect>
+        
+        <!-- Corner Decorations -->
+        <g fill="url(#borderGradient)">
+            <path d="M5,15 L5,5 L15,5 L15,10 L10,10 L10,15 Z"></path>
+            <path d="M385,5 L395,5 L395,15 L390,15 L390,10 L385,10 Z"></path>
+            <path d="M5,285 L5,295 L15,295 L15,290 L10,290 L10,285 Z"></path>
+            <path d="M385,295 L395,295 L395,285 L390,285 L390,290 L385,290 Z"></path>
+        </g>
+        
+        <!-- Grid Pattern -->
+        <g stroke="#FFFFFF" stroke-width="0.5" opacity="0.1">
+            <path d="M5,45 L395,45"></path>
+            <path d="M5,85 L395,85"></path>
+            <path d="M5,125 L395,125"></path>
+            <path d="M5,165 L395,165"></path>
+            <path d="M5,205 L395,205"></path>
+            <path d="M5,245 L395,245"></path>
+            <path d="M5,285 L395,285"></path>
+            
+            <path d="M45,5 L45,295"></path>
+            <path d="M85,5 L85,295"></path>
+            <path d="M125,5 L125,295"></path>
+            <path d="M165,5 L165,295"></path>
+            <path d="M205,5 L205,295"></path>
+            <path d="M245,5 L245,295"></path>
+            <path d="M285,5 L285,295"></path>
+            <path d="M325,5 L325,295"></path>
+            <path d="M365,5 L365,295"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240px" height="60px" viewBox="0 0 240 60" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>ChronoCore Logo</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="logoGradient">
+            <stop stop-color="#4F46E5" offset="0%"></stop>
+            <stop stop-color="#8B5CF6" offset="50%"></stop>
+            <stop stop-color="#EC4899" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M30,10 C18.95,10 10,18.95 10,30 C10,41.05 18.95,50 30,50 C41.05,50 50,41.05 50,30 C50,18.95 41.05,10 30,10 Z M30,46 C21.16,46 14,38.84 14,30 C14,21.16 21.16,14 30,14 C38.84,14 46,21.16 46,30 C46,38.84 38.84,46 30,46 Z" fill="url(#logoGradient)" fill-rule="nonzero"></path>
+        <path d="M30,22 C25.58,22 22,25.58 22,30 C22,34.42 25.58,38 30,38 C34.42,38 38,34.42 38,30 C38,25.58 34.42,22 30,22 Z M30,34 C27.79,34 26,32.21 26,30 C26,27.79 27.79,26 30,26 C32.21,26 34,27.79 34,30 C34,32.21 32.21,34 30,34 Z" fill="url(#logoGradient)" fill-rule="nonzero"></path>
+        <text font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF">
+            <tspan x="60" y="35">ChronoCore</tspan>
+        </text>
+        <text font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#A0AEC0">
+            <tspan x="60" y="48">Path of Realities</tspan>
+        </text>
+    </g>
+</svg>

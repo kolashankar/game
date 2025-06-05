@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Urban Realm</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="urbanGradient">
+            <stop stop-color="#4B5563" offset="0%"></stop>
+            <stop stop-color="#9CA3AF" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" id="urbanGlow">
+            <feGaussianBlur stdDeviation="5" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Hexagon Base -->
+        <path d="M100,20 L170,60 L170,140 L100,180 L30,140 L30,60 Z" fill="url(#urbanGradient)" fill-rule="nonzero"></path>
+        
+        <!-- Inner Hexagon -->
+        <path d="M100,40 L150,70 L150,130 L100,160 L50,130 L50,70 Z" stroke="#FFFFFF" stroke-width="2" opacity="0.3"></path>
+        
+        <!-- Urban Pattern - City Skyline -->
+        <g fill="#FFFFFF" opacity="0.6">
+            <!-- Buildings -->
+            <rect x="60" y="90" width="15" height="60"></rect>
+            <rect x="80" y="70" width="15" height="80"></rect>
+            <rect x="100" y="50" width="15" height="100"></rect>
+            <rect x="120" y="80" width="15" height="70"></rect>
+            
+            <!-- Windows -->
+            <g fill="#4B5563">
+                <rect x="63" y="95" width="4" height="4"></rect>
+                <rect x="68" y="95" width="4" height="4"></rect>
+                <rect x="63" y="105" width="4" height="4"></rect>
+                <rect x="68" y="105" width="4" height="4"></rect>
+                <rect x="63" y="115" width="4" height="4"></rect>
+                <rect x="68" y="115" width="4" height="4"></rect>
+                <rect x="63" y="125" width="4" height="4"></rect>
+                <rect x="68" y="125" width="4" height="4"></rect>
+                <rect x="63" y="135" width="4" height="4"></rect>
+                <rect x="68" y="135" width="4" height="4"></rect>
+                
+                <rect x="83" y="75" width="4" height="4"></rect>
+                <rect x="88" y="75" width="4" height="4"></rect>
+                <rect x="83" y="85" width="4" height="4"></rect>
+                <rect x="88" y="85" width="4" height="4"></rect>
+                <rect x="83" y="95" width="4" height="4"></rect>
+                <rect x="88" y="95" width="4" height="4"></rect>
+                <rect x="83" y="105" width="4" height="4"></rect>
+                <rect x="88" y="105" width="4" height="4"></rect>
+                <rect x="83" y="115" width="4" height="4"></rect>
+                <rect x="88" y="115" width="4" height="4"></rect>
+                <rect x="83" y="125" width="4" height="4"></rect>
+                <rect x="88" y="125" width="4" height="4"></rect>
+                <rect x="83" y="135" width="4" height="4"></rect>
+                <rect x="88" y="135" width="4" height="4"></rect>
+                
+                <rect x="103" y="55" width="4" height="4"></rect>
+                <rect x="108" y="55" width="4" height="4"></rect>
+                <rect x="103" y="65" width="4" height="4"></rect>
+                <rect x="108" y="65" width="4" height="4"></rect>
+                <rect x="103" y="75" width="4" height="4"></rect>
+                <rect x="108" y="75" width="4" height="4"></rect>
+                <rect x="103" y="85" width="4" height="4"></rect>
+                <rect x="108" y="85" width="4" height="4"></rect>
+                <rect x="103" y="95" width="4" height="4"></rect>
+                <rect x="108" y="95" width="4" height="4"></rect>
+                <rect x="103" y="105" width="4" height="4"></rect>
+                <rect x="108" y="105" width="4" height="4"></rect>
+                <rect x="103" y="115" width="4" height="4"></rect>
+                <rect x="108" y="115" width="4" height="4"></rect>
+                <rect x="103" y="125" width="4" height="4"></rect>
+                <rect x="108" y="125" width="4" height="4"></rect>
+                <rect x="103" y="135" width="4" height="4"></rect>
+                <rect x="108" y="135" width="4" height="4"></rect>
+                
+                <rect x="123" y="85" width="4" height="4"></rect>
+                <rect x="128" y="85" width="4" height="4"></rect>
+                <rect x="123" y="95" width="4" height="4"></rect>
+                <rect x="128" y="95" width="4" height="4"></rect>
+                <rect x="123" y="105" width="4" height="4"></rect>
+                <rect x="128" y="105" width="4" height="4"></rect>
+                <rect x="123" y="115" width="4" height="4"></rect>
+                <rect x="128" y="115" width="4" height="4"></rect>
+                <rect x="123" y="125" width="4" height="4"></rect>
+                <rect x="128" y="125" width="4" height="4"></rect>
+                <rect x="123" y="135" width="4" height="4"></rect>
+                <rect x="128" y="135" width="4" height="4"></rect>
+            </g>
+        </g>
+        
+        <!-- Glow Effect -->
+        <circle cx="100" cy="100" r="30" fill="#9CA3AF" filter="url(#urbanGlow)" opacity="0.4"></circle>
+        
+        <!-- Center Icon -->
+        <g transform="translate(80, 80)">
+            <rect x="0" y="0" width="40" height="40" fill="#FFFFFF" opacity="0.9"></rect>
+            <rect x="5" y="5" width="30" height="30" fill="#4B5563"></rect>
+            <rect x="10" y="10" width="5" height="5" fill="#FFFFFF"></rect>
+            <rect x="10" y="20" width="5" height="5" fill="#FFFFFF"></rect>
+            <rect x="20" y="10" width="5" height="5" fill="#FFFFFF"></rect>
+            <rect x="20" y="20" width="5" height="5" fill="#FFFFFF"></rect>
+        </g>
+    </g>
+</svg>

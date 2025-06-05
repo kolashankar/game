@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Tech Resource</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="techResourceGradient">
+            <stop stop-color="#1E40AF" offset="0%"></stop>
+            <stop stop-color="#3B82F6" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" id="techResourceGlow">
+            <feGaussianBlur stdDeviation="2" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Resource Glow -->
+        <circle cx="30" cy="30" r="25" fill="#3B82F6" filter="url(#techResourceGlow)" opacity="0.5"></circle>
+        
+        <!-- Resource Base -->
+        <circle cx="30" cy="30" r="25" fill="url(#techResourceGradient)"></circle>
+        
+        <!-- Resource Border -->
+        <circle cx="30" cy="30" r="25" stroke="#FFFFFF" stroke-width="1" opacity="0.5"></circle>
+        
+        <!-- Resource Inner Pattern -->
+        <g stroke="#FFFFFF" stroke-width="1.5" opacity="0.7">
+            <path d="M20,20 L40,20 M20,30 L40,30 M20,40 L40,40"></path>
+            <path d="M25,15 L25,45 M35,15 L35,45"></path>
+        </g>
+        
+        <!-- Resource Highlight -->
+        <path d="M30,5 C43.8071,5 55,16.1929 55,30 C55,30 55,30 55,30 C55,16.1929 43.8071,5 30,5 Z" fill="#FFFFFF" opacity="0.2"></path>
+    </g>
+</svg>

@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gradient-to-b from-dark-900 to-dark-800 min-h-screen text-gray-100;
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-900;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-500 hover:bg-primary-600 text-white focus:ring-primary-500;
+  }
+
+  .btn-secondary {
+    @apply btn bg-secondary-500 hover:bg-secondary-600 text-white focus:ring-secondary-500;
+  }
+
+  .btn-tech {
+    @apply btn bg-tech-500 hover:bg-tech-600 text-white focus:ring-tech-500;
+  }
+
+  .btn-ethics {
+    @apply btn bg-ethics-500 hover:bg-ethics-600 text-white focus:ring-ethics-500;
+  }
+
+  .btn-time {
+    @apply btn bg-time-500 hover:bg-time-600 text-white focus:ring-time-500;
+  }
+
+  .btn-outline {
+    @apply btn border-2 bg-transparent hover:bg-opacity-10;
+  }
+
+  .btn-outline-primary {
+    @apply btn-outline border-primary-500 text-primary-500 hover:bg-primary-500;
+  }
+
+  .card {
+    @apply bg-dark-800 rounded-lg p-6 shadow-lg border border-dark-700;
+  }
+
+  .card-glow {
+    @apply card border border-primary-500 shadow-neon;
+  }
+
+  .card-glow-tech {
+    @apply card border border-tech-500 shadow-neon-tech;
+  }
+
+  .card-glow-ethics {
+    @apply card border border-ethics-500 shadow-neon-ethics;
+  }
+
+  .card-glow-time {
+    @apply card border border-time-500 shadow-neon-time;
+  }
+
+  .input {
+    @apply bg-dark-700 border border-dark-600 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+  }
+
+  .hex-grid {
+    @apply grid grid-cols-6 gap-2;
+  }
+
+  .hex {
+    @apply relative w-24 h-24 bg-dark-700 border border-dark-600 transition-all duration-200 hover:border-primary-500;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+
+  .hex-content {
+    @apply absolute inset-0 flex items-center justify-center;
+  }
+
+  /* Neon text effect */
+  .neon-text {
+    @apply text-primary-500;
+    text-shadow: 0 0 5px theme('colors.primary.500'), 0 0 10px theme('colors.primary.500');
+  }
+
+  .neon-text-tech {
+    @apply text-tech-500;
+    text-shadow: 0 0 5px theme('colors.tech.500'), 0 0 10px theme('colors.tech.500');
+  }
+
+  .neon-text-ethics {
+    @apply text-ethics-500;
+    text-shadow: 0 0 5px theme('colors.ethics.500'), 0 0 10px theme('colors.ethics.500');
+  }
+
+  .neon-text-time {
+    @apply text-time-500;
+    text-shadow: 0 0 5px theme('colors.time.500'), 0 0 10px theme('colors.time.500');
+  }
+
+  /* Cyberpunk-inspired grid background */
+  .cyber-grid {
+    @apply relative;
+    background-image: 
+      linear-gradient(to right, theme('colors.dark.700') 1px, transparent 1px),
+      linear-gradient(to bottom, theme('colors.dark.700') 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Timeline connector */
+  .timeline-connector {
+    @apply h-1 bg-gradient-to-r from-primary-500 to-tech-500 rounded-full;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-dark-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-dark-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-dark-500;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="chronocore_companion">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <!-- Preload fonts -->
+  <link rel="preload" href="fonts/Orbitron-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/Orbitron-Medium.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/Orbitron-Bold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/Exo-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/Exo-Medium.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/Exo-Bold.ttf" as="font" type="font/ttf" crossorigin>
+  
+  <!-- Font styles -->
+  <style>
+    @font-face {
+      font-family: 'Orbitron';
+      src: url('fonts/Orbitron-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Orbitron';
+      src: url('fonts/Orbitron-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Orbitron';
+      src: url('fonts/Orbitron-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Exo';
+      src: url('fonts/Exo-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Exo';
+      src: url('fonts/Exo-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Exo';
+      src: url('fonts/Exo-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+  </style>
+
+  <title>chronocore_companion</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!-- Loading indicator -->
+  <div id="loading" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background-color: #121212; z-index: 9999;">
+    <div style="text-align: center;">
+      <div style="width: 50px; height: 50px; border: 5px solid #333; border-radius: 50%; border-top-color: #0088ff; animation: spin 1s linear infinite;"></div>
+      <p style="margin-top: 20px; font-family: 'Orbitron', sans-serif; color: #ffffff;">Loading ChronoCore...</p>
+    </div>
+  </div>
+  
+  <style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  
+  <script>
+    // Hide loading indicator when Flutter app is ready
+    window.addEventListener('flutter-first-frame', function() {
+      document.getElementById('loading').style.display = 'none';
+    });
+  </script>
+  
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

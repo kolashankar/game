@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300px" height="200px" viewBox="0 0 300 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Player Card Background</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="playerCardGradient">
+            <stop stop-color="#1E293B" offset="0%"></stop>
+            <stop stop-color="#0F172A" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="playerBorderGradient">
+            <stop stop-color="#4F46E5" offset="0%"></stop>
+            <stop stop-color="#8B5CF6" offset="50%"></stop>
+            <stop stop-color="#EC4899" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Card Background -->
+        <rect fill="url(#playerCardGradient)" x="5" y="5" width="290" height="190" rx="10"></rect>
+        
+        <!-- Card Border -->
+        <rect stroke="url(#playerBorderGradient)" stroke-width="2" x="5" y="5" width="290" height="190" rx="10"></rect>
+        
+        <!-- Decorative Elements -->
+        <g opacity="0.2" stroke="#FFFFFF" stroke-width="1">
+            <path d="M20,30 L280,30"></path>
+            <path d="M20,170 L280,170"></path>
+            <circle cx="50" cy="100" r="30" stroke-dasharray="3,3"></circle>
+        </g>
+        
+        <!-- Avatar Area -->
+        <circle cx="50" cy="100" r="35" stroke="#FFFFFF" stroke-width="1" opacity="0.5" fill="none"></circle>
+        
+        <!-- Stats Area -->
+        <rect fill="#0F172A" opacity="0.5" x="100" y="50" width="180" height="100" rx="5"></rect>
+        
+        <!-- Stat Bars -->
+        <g opacity="0.7">
+            <rect fill="#0F172A" x="110" y="60" width="160" height="15" rx="3"></rect>
+            <rect fill="#0F172A" x="110" y="85" width="160" height="15" rx="3"></rect>
+            <rect fill="#0F172A" x="110" y="110" width="160" height="15" rx="3"></rect>
+            <rect fill="#0F172A" x="110" y="135" width="160" height="15" rx="3"></rect>
+        </g>
+        
+        <!-- Corner Decorations -->
+        <g fill="url(#playerBorderGradient)">
+            <path d="M5,15 L5,5 L15,5 L15,10 L10,10 L10,15 Z"></path>
+            <path d="M285,5 L295,5 L295,15 L290,15 L290,10 L285,10 Z"></path>
+            <path d="M5,185 L5,195 L15,195 L15,190 L10,190 L10,185 Z"></path>
+            <path d="M285,195 L295,195 L295,185 L290,185 L290,190 L285,190 Z"></path>
+        </g>
+    </g>
+</svg>

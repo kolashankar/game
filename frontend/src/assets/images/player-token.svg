@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Player Token</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="tokenGradient">
+            <stop stop-color="#4F46E5" offset="0%"></stop>
+            <stop stop-color="#8B5CF6" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" id="tokenGlow">
+            <feGaussianBlur stdDeviation="2" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Token Glow -->
+        <circle cx="30" cy="30" r="25" fill="#4F46E5" filter="url(#tokenGlow)" opacity="0.5"></circle>
+        
+        <!-- Token Base -->
+        <circle cx="30" cy="30" r="25" fill="url(#tokenGradient)"></circle>
+        
+        <!-- Token Border -->
+        <circle cx="30" cy="30" r="25" stroke="#FFFFFF" stroke-width="1" opacity="0.5"></circle>
+        
+        <!-- Token Inner Circle -->
+        <circle cx="30" cy="30" r="15" fill="#0F172A"></circle>
+        
+        <!-- Token Highlight -->
+        <path d="M30,5 C43.8071,5 55,16.1929 55,30 C55,30 55,30 55,30 C55,16.1929 43.8071,5 30,5 Z" fill="#FFFFFF" opacity="0.2"></path>
+        
+        <!-- Token Icon (Placeholder) -->
+        <path d="M30,20 C33.866,20 37,23.134 37,27 C37,30.866 33.866,34 30,34 C26.134,34 23,30.866 23,27 C23,23.134 26.134,20 30,20 Z M30,36 C36.627,36 42,38.686 42,42 L42,45 L18,45 L18,42 C18,38.686 23.373,36 30,36 Z" fill="#FFFFFF"></path>
+    </g>
+</svg>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Realm Icon</title>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M12,2 L2,7 L12,12 L22,7 L12,2 Z M2,17 L12,22 L22,17 L22,7 L2,7 L2,17 Z M12,12 L12,22 L2,17 L2,7 L12,12 Z M12,12 L22,7 L22,17 L12,22 L12,12 Z" fill="#F59E0B" fill-rule="nonzero"></path>
+    </g>
+</svg>

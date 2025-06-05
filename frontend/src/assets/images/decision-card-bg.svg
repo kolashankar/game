@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400px" height="300px" viewBox="0 0 400 300" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Decision Card Background</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="decisionCardGradient">
+            <stop stop-color="#1E293B" offset="0%"></stop>
+            <stop stop-color="#0F172A" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="decisionBorderGradient">
+            <stop stop-color="#EC4899" offset="0%"></stop>
+            <stop stop-color="#8B5CF6" offset="50%"></stop>
+            <stop stop-color="#4F46E5" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Card Background -->
+        <rect fill="url(#decisionCardGradient)" x="10" y="10" width="380" height="280" rx="15"></rect>
+        
+        <!-- Card Border -->
+        <rect stroke="url(#decisionBorderGradient)" stroke-width="2" x="10" y="10" width="380" height="280" rx="15"></rect>
+        
+        <!-- Decorative Elements -->
+        <g opacity="0.2" stroke="#FFFFFF" stroke-width="1">
+            <path d="M30,50 L370,50"></path>
+            <path d="M30,250 L370,250"></path>
+            <path d="M200,30 L200,270"></path>
+        </g>
+        
+        <!-- Title Area -->
+        <rect fill="#0F172A" x="30" y="30" width="340" height="40" rx="5"></rect>
+        
+        <!-- Content Area -->
+        <rect fill="#0F172A" opacity="0.5" x="30" y="90" width="340" height="100" rx="5"></rect>
+        
+        <!-- Option Areas -->
+        <rect fill="#0F172A" x="30" y="210" width="160" height="60" rx="5"></rect>
+        <rect fill="#0F172A" x="210" y="210" width="160" height="60" rx="5"></rect>
+        
+        <!-- Corner Decorations -->
+        <g fill="url(#decisionBorderGradient)">
+            <path d="M10,25 L10,10 L25,10 L25,15 L15,15 L15,25 Z"></path>
+            <path d="M375,10 L390,10 L390,25 L385,25 L385,15 L375,15 Z"></path>
+            <path d="M10,275 L10,290 L25,290 L25,285 L15,285 L15,275 Z"></path>
+            <path d="M375,290 L390,290 L390,275 L385,275 L385,285 L375,285 Z"></path>
+        </g>
+        
+        <!-- Dividing Lines -->
+        <path d="M200,210 L200,270" stroke="#FFFFFF" stroke-width="1" opacity="0.3"></path>
+    </g>
+</svg>

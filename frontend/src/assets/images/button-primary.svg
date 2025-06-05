@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="50px" viewBox="0 0 200 50" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Primary Button</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="buttonGradient">
+            <stop stop-color="#4F46E5" offset="0%"></stop>
+            <stop stop-color="#8B5CF6" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-8%" y="-30%" width="116%" height="160%" filterUnits="objectBoundingBox" id="buttonShadow">
+            <feGaussianBlur stdDeviation="3" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Button Shadow -->
+        <rect fill="#4F46E5" filter="url(#buttonShadow)" opacity="0.4" x="10" y="15" width="180" height="30" rx="15"></rect>
+        
+        <!-- Button Background -->
+        <rect fill="url(#buttonGradient)" x="10" y="5" width="180" height="40" rx="20"></rect>
+        
+        <!-- Button Border -->
+        <rect stroke="#FFFFFF" stroke-width="1" opacity="0.3" x="10.5" y="5.5" width="179" height="39" rx="19.5"></rect>
+        
+        <!-- Button Highlight -->
+        <path d="M20,6 L180,6 C189.941,6 198,14.059 198,24 L198,24 C198,14.059 189.941,6 180,6 L20,6 Z" fill="#FFFFFF" opacity="0.2"></path>
+    </g>
+</svg>

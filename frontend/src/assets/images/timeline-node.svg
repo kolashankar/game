@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Timeline Node</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="timelineNodeGradient">
+            <stop stop-color="#4F46E5" offset="0%"></stop>
+            <stop stop-color="#8B5CF6" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" id="timelineNodeGlow">
+            <feGaussianBlur stdDeviation="3" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Node Glow -->
+        <circle cx="40" cy="40" r="20" fill="#4F46E5" filter="url(#timelineNodeGlow)" opacity="0.5"></circle>
+        
+        <!-- Node Base -->
+        <circle cx="40" cy="40" r="20" fill="url(#timelineNodeGradient)"></circle>
+        
+        <!-- Node Border -->
+        <circle cx="40" cy="40" r="20" stroke="#FFFFFF" stroke-width="2" opacity="0.7"></circle>
+        
+        <!-- Node Inner Circle -->
+        <circle cx="40" cy="40" r="12" fill="#0F172A"></circle>
+        
+        <!-- Node Highlight -->
+        <path d="M40,20 C51.0457,20 60,28.9543 60,40 C60,40 60,40 60,40 C60,28.9543 51.0457,20 40,20 Z" fill="#FFFFFF" opacity="0.2"></path>
+        
+        <!-- Connection Points -->
+        <circle cx="40" cy="10" r="3" fill="#8B5CF6" stroke="#FFFFFF" stroke-width="1" opacity="0.8"></circle>
+        <circle cx="70" cy="40" r="3" fill="#8B5CF6" stroke="#FFFFFF" stroke-width="1" opacity="0.8"></circle>
+        <circle cx="40" cy="70" r="3" fill="#8B5CF6" stroke="#FFFFFF" stroke-width="1" opacity="0.8"></circle>
+        <circle cx="10" cy="40" r="3" fill="#8B5CF6" stroke="#FFFFFF" stroke-width="1" opacity="0.8"></circle>
+        
+        <!-- Connection Lines -->
+        <path d="M40,20 L40,13" stroke="#8B5CF6" stroke-width="2" opacity="0.5"></path>
+        <path d="M60,40 L67,40" stroke="#8B5CF6" stroke-width="2" opacity="0.5"></path>
+        <path d="M40,60 L40,67" stroke="#8B5CF6" stroke-width="2" opacity="0.5"></path>
+        <path d="M20,40 L13,40" stroke="#8B5CF6" stroke-width="2" opacity="0.5"></path>
+    </g>
+</svg>

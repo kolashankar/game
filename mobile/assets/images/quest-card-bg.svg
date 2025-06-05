@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300px" height="400px" viewBox="0 0 300 400" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Quest Card Background</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="questCardGradient">
+            <stop stop-color="#1E293B" offset="0%"></stop>
+            <stop stop-color="#0F172A" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="borderGradient">
+            <stop stop-color="#4F46E5" offset="0%"></stop>
+            <stop stop-color="#8B5CF6" offset="50%"></stop>
+            <stop stop-color="#EC4899" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Card Background -->
+        <rect fill="url(#questCardGradient)" x="10" y="10" width="280" height="380" rx="15"></rect>
+        
+        <!-- Card Border -->
+        <rect stroke="url(#borderGradient)" stroke-width="2" x="10" y="10" width="280" height="380" rx="15"></rect>
+        
+        <!-- Decorative Elements -->
+        <g opacity="0.2" stroke="#FFFFFF" stroke-width="1">
+            <path d="M30,50 L270,50"></path>
+            <path d="M30,350 L270,350"></path>
+            <path d="M50,30 L50,370"></path>
+            <path d="M250,30 L250,370"></path>
+            <circle cx="150" cy="200" r="100" stroke-dasharray="5,5"></circle>
+            <circle cx="150" cy="200" r="70" stroke-dasharray="5,5"></circle>
+            <circle cx="150" cy="200" r="40" stroke-dasharray="5,5"></circle>
+        </g>
+        
+        <!-- Corner Decorations -->
+        <g fill="url(#borderGradient)">
+            <path d="M10,25 L10,10 L25,10 L25,15 L15,15 L15,25 Z"></path>
+            <path d="M275,10 L290,10 L290,25 L285,25 L285,15 L275,15 Z"></path>
+            <path d="M10,375 L10,390 L25,390 L25,385 L15,385 L15,375 Z"></path>
+            <path d="M275,390 L290,390 L290,375 L285,375 L285,385 L275,385 Z"></path>
+        </g>
+        
+        <!-- Title Area -->
+        <rect fill="#0F172A" x="30" y="30" width="240" height="40" rx="5"></rect>
+        
+        <!-- Content Area -->
+        <rect fill="#0F172A" opacity="0.5" x="30" y="90" width="240" height="200" rx="5"></rect>
+        
+        <!-- Decision Area -->
+        <rect fill="#0F172A" x="30" y="310" width="240" height="60" rx="5"></rect>
+    </g>
+</svg>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Void Resource</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="voidResourceGradient">
+            <stop stop-color="#6D28D9" offset="0%"></stop>
+            <stop stop-color="#8B5CF6" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" id="voidResourceGlow">
+            <feGaussianBlur stdDeviation="2" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+        <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="70%" id="voidResourceRadial">
+            <stop stop-color="#C4B5FD" stop-opacity="0.6" offset="0%"></stop>
+            <stop stop-color="#6D28D9" stop-opacity="0" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Resource Glow -->
+        <circle cx="30" cy="30" r="25" fill="#8B5CF6" filter="url(#voidResourceGlow)" opacity="0.5"></circle>
+        
+        <!-- Resource Base -->
+        <circle cx="30" cy="30" r="25" fill="url(#voidResourceGradient)"></circle>
+        
+        <!-- Resource Border -->
+        <circle cx="30" cy="30" r="25" stroke="#FFFFFF" stroke-width="1" opacity="0.5"></circle>
+        
+        <!-- Resource Inner Pattern - Void/Space -->
+        <circle cx="30" cy="30" r="15" fill="url(#voidResourceRadial)"></circle>
+        
+        <!-- Stars -->
+        <g fill="#FFFFFF">
+            <circle cx="25" cy="20" r="1"></circle>
+            <circle cx="35" cy="22" r="0.8"></circle>
+            <circle cx="30" cy="25" r="1.2"></circle>
+            <circle cx="38" cy="30" r="0.8"></circle>
+            <circle cx="35" cy="38" r="1"></circle>
+            <circle cx="27" cy="37" r="0.8"></circle>
+            <circle cx="22" cy="32" r="1"></circle>
+            <circle cx="23" cy="25" r="0.8"></circle>
+        </g>
+        
+        <!-- Swirling Void Lines -->
+        <g stroke="#FFFFFF" stroke-width="0.8" opacity="0.6">
+            <path d="M30,20 C35,22 37,27 35,32 C33,37 27,37 22,32 C17,27 20,22 30,20 Z"></path>
+            <path d="M30,25 C33,26 34,30 33,33 C31,36 27,36 24,33 C21,30 25,26 30,25 Z"></path>
+        </g>
+        
+        <!-- Resource Highlight -->
+        <path d="M30,5 C43.8071,5 55,16.1929 55,30 C55,30 55,30 55,30 C55,16.1929 43.8071,5 30,5 Z" fill="#FFFFFF" opacity="0.2"></path>
+    </g>
+</svg>

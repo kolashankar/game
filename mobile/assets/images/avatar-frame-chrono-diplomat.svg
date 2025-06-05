@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Chrono Diplomat Avatar Frame</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="chronoDiplomatFrameGradient">
+            <stop stop-color="#BE185D" offset="0%"></stop>
+            <stop stop-color="#EC4899" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" id="chronoDiplomatFrameGlow">
+            <feGaussianBlur stdDeviation="2" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Outer Glow -->
+        <circle cx="60" cy="60" r="55" stroke="#EC4899" stroke-width="6" opacity="0.4" filter="url(#chronoDiplomatFrameGlow)"></circle>
+        
+        <!-- Main Frame -->
+        <circle cx="60" cy="60" r="55" stroke="url(#chronoDiplomatFrameGradient)" stroke-width="6"></circle>
+        
+        <!-- Inner Border -->
+        <circle cx="60" cy="60" r="50" stroke="#FFFFFF" stroke-width="1" opacity="0.5"></circle>
+        
+        <!-- Time Pattern -->
+        <g stroke="#FFFFFF" stroke-width="1.5" opacity="0.5">
+            <circle cx="60" cy="60" r="40" stroke-dasharray="5,5"></circle>
+            <circle cx="60" cy="60" r="30" stroke-dasharray="3,3"></circle>
+            <circle cx="60" cy="60" r="20" stroke-dasharray="2,2"></circle>
+            
+            <!-- Clock Hands -->
+            <path d="M60,60 L60,30" stroke-linecap="round"></path>
+            <path d="M60,60 L80,70" stroke-linecap="round"></path>
+        </g>
+        
+        <!-- Corner Decorations -->
+        <g fill="url(#chronoDiplomatFrameGradient)">
+            <circle cx="25" cy="25" r="6"></circle>
+            <circle cx="95" cy="25" r="6"></circle>
+            <circle cx="25" cy="95" r="6"></circle>
+            <circle cx="95" cy="95" r="6"></circle>
+        </g>
+        
+        <!-- Decorative Elements -->
+        <path d="M60,10 C87.6142,10 110,32.3858 110,60 C110,87.6142 87.6142,110 60,110 C32.3858,110 10,87.6142 10,60 C10,32.3858 32.3858,10 60,10 Z" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="3,3" opacity="0.3"></path>
+    </g>
+</svg>

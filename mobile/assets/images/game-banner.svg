@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200px" height="400px" viewBox="0 0 1200 400" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>ChronoCore Game Banner</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="bannerGradient">
+            <stop stop-color="#111827" offset="0%"></stop>
+            <stop stop-color="#1F2937" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="titleGradient">
+            <stop stop-color="#4F46E5" offset="0%"></stop>
+            <stop stop-color="#8B5CF6" offset="50%"></stop>
+            <stop stop-color="#EC4899" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" id="textGlow">
+            <feGaussianBlur stdDeviation="5" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Background -->
+        <rect fill="url(#bannerGradient)" x="0" y="0" width="1200" height="400"></rect>
+        
+        <!-- Grid Lines -->
+        <g stroke="#1F2937" stroke-width="1" opacity="0.3">
+            <!-- Horizontal Lines -->
+            <line x1="0" y1="50" x2="1200" y2="50"></line>
+            <line x1="0" y1="100" x2="1200" y2="100"></line>
+            <line x1="0" y1="150" x2="1200" y2="150"></line>
+            <line x1="0" y1="200" x2="1200" y2="200"></line>
+            <line x1="0" y1="250" x2="1200" y2="250"></line>
+            <line x1="0" y1="300" x2="1200" y2="300"></line>
+            <line x1="0" y1="350" x2="1200" y2="350"></line>
+            
+            <!-- Vertical Lines -->
+            <line x1="100" y1="0" x2="100" y2="400"></line>
+            <line x1="200" y1="0" x2="200" y2="400"></line>
+            <line x1="300" y1="0" x2="300" y2="400"></line>
+            <line x1="400" y1="0" x2="400" y2="400"></line>
+            <line x1="500" y1="0" x2="500" y2="400"></line>
+            <line x1="600" y1="0" x2="600" y2="400"></line>
+            <line x1="700" y1="0" x2="700" y2="400"></line>
+            <line x1="800" y1="0" x2="800" y2="400"></line>
+            <line x1="900" y1="0" x2="900" y2="400"></line>
+            <line x1="1000" y1="0" x2="1000" y2="400"></line>
+            <line x1="1100" y1="0" x2="1100" y2="400"></line>
+        </g>
+        
+        <!-- Decorative Elements -->
+        <!-- Tech Realm (Stylized) -->
+        <g transform="translate(100, 100)">
+            <path d="M50,0 L100,25 L100,75 L50,100 L0,75 L0,25 Z" fill="#3B82F6" opacity="0.7"></path>
+            <path d="M50,20 L80,35 L80,65 L50,80 L20,65 L20,35 Z" stroke="#FFFFFF" stroke-width="1" opacity="0.5" fill="none"></path>
+        </g>
+        
+        <!-- Nature Realm (Stylized) -->
+        <g transform="translate(950, 250)">
+            <path d="M50,0 L100,25 L100,75 L50,100 L0,75 L0,25 Z" fill="#10B981" opacity="0.7"></path>
+            <path d="M50,20 L80,35 L80,65 L50,80 L20,65 L20,35 Z" stroke="#FFFFFF" stroke-width="1" opacity="0.5" fill="none"></path>
+        </g>
+        
+        <!-- Void Realm (Stylized) -->
+        <g transform="translate(200, 250)">
+            <path d="M50,0 L100,25 L100,75 L50,100 L0,75 L0,25 Z" fill="#8B5CF6" opacity="0.7"></path>
+            <path d="M50,20 L80,35 L80,65 L50,80 L20,65 L20,35 Z" stroke="#FFFFFF" stroke-width="1" opacity="0.5" fill="none"></path>
+        </g>
+        
+        <!-- Urban Realm (Stylized) -->
+        <g transform="translate(850, 100)">
+            <path d="M50,0 L100,25 L100,75 L50,100 L0,75 L0,25 Z" fill="#9CA3AF" opacity="0.7"></path>
+            <path d="M50,20 L80,35 L80,65 L50,80 L20,65 L20,35 Z" stroke="#FFFFFF" stroke-width="1" opacity="0.5" fill="none"></path>
+        </g>
+        
+        <!-- Connecting Lines -->
+        <g stroke="#FFFFFF" stroke-width="1" opacity="0.3">
+            <path d="M200,150 L300,200 L400,150 L500,200 L600,150 L700,200 L800,150 L900,200"></path>
+            <path d="M200,250 L300,300 L400,250 L500,300 L600,250 L700,300 L800,250 L900,300"></path>
+        </g>
+        
+        <!-- Title -->
+        <g transform="translate(400, 150)">
+            <text font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="url(#titleGradient)" filter="url(#textGlow)">
+                <tspan x="0" y="60">ChronoCore</tspan>
+            </text>
+            <text font-family="Arial, sans-serif" font-size="24" font-weight="normal" fill="#FFFFFF" opacity="0.8">
+                <tspan x="100" y="100">Path of Realities</tspan>
+            </text>
+        </g>
+        
+        <!-- Tagline -->
+        <text font-family="Arial, sans-serif" font-size="18" font-weight="normal" fill="#FFFFFF" opacity="0.6" text-anchor="middle">
+            <tspan x="600" y="250">Shape the future across multiple timelines</tspan>
+        </text>
+        
+        <!-- Call to Action -->
+        <g transform="translate(525, 280)">
+            <rect x="0" y="0" width="150" height="50" rx="25" fill="#4F46E5"></rect>
+            <text font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF" text-anchor="middle">
+                <tspan x="75" y="32">PLAY NOW</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

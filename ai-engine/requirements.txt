@@ -1,0 +1,17 @@
+langchain>=0.0.310
+langchain-community>=0.0.1
+langchain-openai>=0.0.1
+openai>=0.27.8
+pinecone>=2.2.2
+pymongo>=4.4.1
+fastapi>=0.100.0
+uvicorn>=0.23.1
+python-dotenv>=1.0.0
+pydantic>=1.10.12
+numpy>=1.25.1
+pandas>=2.0.3
+python-jose>=3.3.0
+httpx>=0.24.1
+pytest>=7.4.0
+gnureadline>=8.1.2; platform_system == 'Linux'
+pyreadline3>=3.4.1; platform_system == 'Windows'

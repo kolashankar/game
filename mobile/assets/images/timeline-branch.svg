@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="100px" viewBox="0 0 200 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Timeline Branch</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="0%" id="timelineBranchGradient">
+            <stop stop-color="#4F46E5" offset="0%"></stop>
+            <stop stop-color="#8B5CF6" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-10%" y="-30%" width="120%" height="160%" filterUnits="objectBoundingBox" id="timelineBranchGlow">
+            <feGaussianBlur stdDeviation="2" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Main Timeline Path -->
+        <path d="M10,50 L190,50" stroke="url(#timelineBranchGradient)" stroke-width="4" opacity="0.7"></path>
+        
+        <!-- Branch Path Up -->
+        <path d="M100,50 C130,50 150,30 170,20" stroke="url(#timelineBranchGradient)" stroke-width="4" opacity="0.7"></path>
+        
+        <!-- Branch Path Down -->
+        <path d="M100,50 C130,50 150,70 170,80" stroke="url(#timelineBranchGradient)" stroke-width="4" opacity="0.7"></path>
+        
+        <!-- Glow Effect -->
+        <path d="M10,50 L190,50" stroke="#4F46E5" stroke-width="8" opacity="0.3" filter="url(#timelineBranchGlow)"></path>
+        <path d="M100,50 C130,50 150,30 170,20" stroke="#4F46E5" stroke-width="8" opacity="0.3" filter="url(#timelineBranchGlow)"></path>
+        <path d="M100,50 C130,50 150,70 170,80" stroke="#4F46E5" stroke-width="8" opacity="0.3" filter="url(#timelineBranchGlow)"></path>
+        
+        <!-- Branch Point -->
+        <circle cx="100" cy="50" r="8" fill="#8B5CF6" stroke="#FFFFFF" stroke-width="1"></circle>
+        
+        <!-- Timeline Endpoints -->
+        <circle cx="10" cy="50" r="5" fill="#4F46E5" stroke="#FFFFFF" stroke-width="1"></circle>
+        <circle cx="190" cy="50" r="5" fill="#8B5CF6" stroke="#FFFFFF" stroke-width="1"></circle>
+        <circle cx="170" cy="20" r="5" fill="#8B5CF6" stroke="#FFFFFF" stroke-width="1"></circle>
+        <circle cx="170" cy="80" r="5" fill="#8B5CF6" stroke="#FFFFFF" stroke-width="1"></circle>
+    </g>
+</svg>

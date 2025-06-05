@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Urban Resource</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="urbanResourceGradient">
+            <stop stop-color="#4B5563" offset="0%"></stop>
+            <stop stop-color="#9CA3AF" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" id="urbanResourceGlow">
+            <feGaussianBlur stdDeviation="2" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Resource Glow -->
+        <circle cx="30" cy="30" r="25" fill="#9CA3AF" filter="url(#urbanResourceGlow)" opacity="0.5"></circle>
+        
+        <!-- Resource Base -->
+        <circle cx="30" cy="30" r="25" fill="url(#urbanResourceGradient)"></circle>
+        
+        <!-- Resource Border -->
+        <circle cx="30" cy="30" r="25" stroke="#FFFFFF" stroke-width="1" opacity="0.5"></circle>
+        
+        <!-- Resource Inner Pattern - Buildings -->
+        <g fill="#FFFFFF" opacity="0.7">
+            <rect x="20" y="30" width="5" height="15"></rect>
+            <rect x="27.5" y="25" width="5" height="20"></rect>
+            <rect x="35" y="20" width="5" height="25"></rect>
+            
+            <!-- Windows -->
+            <g fill="#4B5563">
+                <rect x="21" y="32" width="1.5" height="1.5"></rect>
+                <rect x="22.5" y="32" width="1.5" height="1.5"></rect>
+                <rect x="21" y="35" width="1.5" height="1.5"></rect>
+                <rect x="22.5" y="35" width="1.5" height="1.5"></rect>
+                <rect x="21" y="38" width="1.5" height="1.5"></rect>
+                <rect x="22.5" y="38" width="1.5" height="1.5"></rect>
+                <rect x="21" y="41" width="1.5" height="1.5"></rect>
+                <rect x="22.5" y="41" width="1.5" height="1.5"></rect>
+                
+                <rect x="28.5" y="27" width="1.5" height="1.5"></rect>
+                <rect x="30" y="27" width="1.5" height="1.5"></rect>
+                <rect x="28.5" y="30" width="1.5" height="1.5"></rect>
+                <rect x="30" y="30" width="1.5" height="1.5"></rect>
+                <rect x="28.5" y="33" width="1.5" height="1.5"></rect>
+                <rect x="30" y="33" width="1.5" height="1.5"></rect>
+                <rect x="28.5" y="36" width="1.5" height="1.5"></rect>
+                <rect x="30" y="36" width="1.5" height="1.5"></rect>
+                <rect x="28.5" y="39" width="1.5" height="1.5"></rect>
+                <rect x="30" y="39" width="1.5" height="1.5"></rect>
+                
+                <rect x="36" y="22" width="1.5" height="1.5"></rect>
+                <rect x="37.5" y="22" width="1.5" height="1.5"></rect>
+                <rect x="36" y="25" width="1.5" height="1.5"></rect>
+                <rect x="37.5" y="25" width="1.5" height="1.5"></rect>
+                <rect x="36" y="28" width="1.5" height="1.5"></rect>
+                <rect x="37.5" y="28" width="1.5" height="1.5"></rect>
+                <rect x="36" y="31" width="1.5" height="1.5"></rect>
+                <rect x="37.5" y="31" width="1.5" height="1.5"></rect>
+                <rect x="36" y="34" width="1.5" height="1.5"></rect>
+                <rect x="37.5" y="34" width="1.5" height="1.5"></rect>
+                <rect x="36" y="37" width="1.5" height="1.5"></rect>
+                <rect x="37.5" y="37" width="1.5" height="1.5"></rect>
+                <rect x="36" y="40" width="1.5" height="1.5"></rect>
+                <rect x="37.5" y="40" width="1.5" height="1.5"></rect>
+            </g>
+        </g>
+        
+        <!-- Resource Highlight -->
+        <path d="M30,5 C43.8071,5 55,16.1929 55,30 C55,30 55,30 55,30 C55,16.1929 43.8071,5 30,5 Z" fill="#FFFFFF" opacity="0.2"></path>
+    </g>
+</svg>

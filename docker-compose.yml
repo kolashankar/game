@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+      - REACT_APP_SOCKET_URL=http://localhost:5000
+
+  # Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+      - mongodb
+    environment:
+      - NODE_ENV=development
+      - PORT=5000
+      - DATABASE_URL=postgres://postgres:root@postgres:5432/postgres
+      - MONGODB_URI=mongodb+srv://kolashankar113:***REMOVED***@cluster0.zfgsqlm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      - AI_ENGINE_URL=http://ai-engine:8000
+      - JWT_SECRET=41b1feab0eb0cf3e2327bde7db22375a17cbaf996bbce3e5fa721416e613b2ea
+      - CORS_ORIGIN=http://localhost:3000
+
+  # AI Engine
+  ai-engine:
+    build:
+      context: ./ai-engine
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ai-engine:/app
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PINECONE_API_KEY=${PINECONE_API_KEY}
+      - PINECONE_ENVIRONMENT=${PINECONE_ENVIRONMENT}
+      - MONGODB_URI=mongodb+srv://kolashankar113:***REMOVED***@cluster0.zfgsqlm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+  # PostgreSQL
+  postgres:
+    image: postgres:14
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=postgres
+
+  # MongoDB
+  mongodb:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=chronocore
+
+  # Pinecone (mock service for local development)
+  pinecone-mock:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./mock-services/pinecone:/usr/share/nginx/html
+
+volumes:
+  postgres_data:
+  mongodb_data:
