@@ -148,34 +148,66 @@ const register = async (req, res, next) => {
  */
 const login = async (req, res, next) => {
   try {
+    logger.info('Login request received', { 
+      body: req.body,
+      headers: req.headers,
+      requestId: req.requestId 
+    });
+    
     const { username, password } = req.body;
 
     // Validate input
     if (!username || !password) {
+      logger.warn('Login failed: Missing credentials', { 
+        username: !!username, 
+        hasPassword: !!password,
+        requestId: req.requestId 
+      });
       return res.status(400).json({
         success: false,
         message: 'Username and password are required'
       });
     }
 
-    logger.info(`Login attempt for user: ${username}`, { requestId: req.requestId });
-
-    // Find user by username
-    const user = await User.findOne({ 
-      where: { username } 
+    logger.info(`Login attempt for user: ${username}`, { 
+      username,
+      requestId: req.requestId 
     });
 
-    if (!user) {
-      logger.warn('Login failed: User not found', { username, requestId: req.requestId });
-      return res.status(401).json({
-        success: false,
-        message: 'Invalid username or password'
+    // Find user by username
+    let user;
+    try {
+      user = await User.findOne({ 
+        where: { username } 
       });
+      
+      if (!user) {
+        logger.warn('Login failed: User not found', { 
+          username, 
+          requestId: req.requestId 
+        });
+        return res.status(401).json({
+          success: false,
+          message: 'Invalid username or password'
+        });
+      }
+    } catch (dbError) {
+      logger.error('Database error during user lookup:', {
+        error: dbError.message,
+        stack: dbError.stack,
+        username,
+        requestId: req.requestId
+      });
+      throw new Error('Database error during authentication');
     }
 
     // Check if user is active
     if (user.isActive === false) {
-      logger.warn('Login failed: User account is inactive', { username, requestId: req.requestId });
+      logger.warn('Login failed: User account is inactive', { 
+        username, 
+        userId: user.id,
+        requestId: req.requestId 
+      });
       return res.status(403).json({
         success: false,
         message: 'Account is inactive. Please contact support.'
@@ -183,10 +215,26 @@ const login = async (req, res, next) => {
     }
 
     // Check password
-    const isMatch = await user.comparePassword(password);
+    let isMatch = false;
+    try {
+      isMatch = await user.comparePassword(password);
+    } catch (pwError) {
+      logger.error('Error comparing passwords:', {
+        error: pwError.message,
+        stack: pwError.stack,
+        username,
+        userId: user.id,
+        requestId: req.requestId
+      });
+      throw new Error('Error during password verification');
+    }
 
     if (!isMatch) {
-      logger.warn('Login failed: Invalid password', { username, requestId: req.requestId });
+      logger.warn('Login failed: Invalid password', { 
+        username, 
+        userId: user.id,
+        requestId: req.requestId 
+      });
       return res.status(401).json({
         success: false,
         message: 'Invalid username or password'
@@ -194,11 +242,34 @@ const login = async (req, res, next) => {
     }
 
     // Update last login
-    user.lastLogin = new Date();
-    await user.save();
+    try {
+      user.lastLogin = new Date();
+      await user.save();
+    } catch (updateError) {
+      logger.error('Error updating last login:', {
+        error: updateError.message,
+        stack: updateError.stack,
+        username,
+        userId: user.id,
+        requestId: req.requestId
+      });
+      // Continue with login even if last login update fails
+    }
 
     // Generate token
-    const token = generateToken(user);
+    let token;
+    try {
+      token = generateToken(user);
+    } catch (tokenError) {
+      logger.error('Error generating JWT token:', {
+        error: tokenError.message,
+        stack: tokenError.stack,
+        username,
+        userId: user.id,
+        requestId: req.requestId
+      });
+      throw new Error('Error generating authentication token');
+    }
 
     logger.info('Login successful', { username, userId: user.id, requestId: req.requestId });
 
