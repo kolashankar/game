@@ -17,14 +17,15 @@ const Game = sequelize.define('games', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  // Add the missing creatorId field
+  // Creator ID can be either a user ID or a guest ID
   creatorId: {
-    type: DataTypes.UUID,
-    allowNull: false,
-    references: {
-      model: 'users',
-      key: 'id'
-    }
+    type: DataTypes.STRING, // Changed to STRING to support guest-* IDs
+    allowNull: false
+  },
+  // Store creator username for display
+  creatorName: {
+    type: DataTypes.STRING,
+    allowNull: false
   },
   status: {
     type: DataTypes.ENUM('waiting', 'active', 'completed', 'abandoned'),
@@ -89,7 +90,7 @@ const GamePlayer = sequelize.define('game_players', {
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true
   },
-  // Add explicit foreign keys
+  // Game reference
   gameId: {
     type: DataTypes.UUID,
     allowNull: false,
@@ -98,22 +99,43 @@ const GamePlayer = sequelize.define('game_players', {
       key: 'id'
     }
   },
+  // User ID can be either a user ID or a guest ID
   userId: {
-    type: DataTypes.UUID,
-    allowNull: false,
-    references: {
-      model: 'users',
-      key: 'id'
-    }
-  },
-  role: {
-    type: DataTypes.ENUM('Techno Monk', 'Shadow Broker', 'Chrono Diplomat', 'Bio-Smith'),
+    type: DataTypes.STRING, // Changed to STRING to support guest-* IDs
     allowNull: false
   },
+  // Store username for display
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  // Track if this is a guest player
+  isGuest: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  },
+  // Player role in the game
+  role: {
+    type: DataTypes.ENUM('time_traveler', 'guardian', 'observer'),
+    allowNull: false,
+    defaultValue: 'time_traveler'
+  },
+  // Player's karma points
   karma: {
     type: DataTypes.INTEGER,
     defaultValue: 0
   },
+  // Is player ready to start
+  isReady: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  },
+  // Current turn order
+  turnOrder: {
+    type: DataTypes.INTEGER,
+    allowNull: true
+  },
+  // Additional game-specific fields
   ownedRealms: {
     type: DataTypes.ARRAY(DataTypes.STRING),
     defaultValue: []
@@ -137,10 +159,6 @@ const GamePlayer = sequelize.define('game_players', {
   inventory: {
     type: DataTypes.JSON,
     defaultValue: {}
-  },
-  isReady: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false
   },
   isWinner: {
     type: DataTypes.BOOLEAN,

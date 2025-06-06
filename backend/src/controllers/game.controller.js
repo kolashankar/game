@@ -15,30 +15,42 @@ const axios = require('axios');
  */
 const createGame = async (req, res, next) => {
   try {
-    const { name, maxPlayers, isPrivate, password, winCondition } = req.body;
-    const user = req.user;
+    const { name, maxPlayers = 4, isPrivate = false, password, winCondition = 'dominance', playerName } = req.body;
+    
+    // Generate a guest user if not authenticated
+    const userId = req.user?.id || `guest-${Date.now()}`;
+    const username = req.user?.username || playerName || `Guest-${Math.floor(Math.random() * 10000)}`;
 
     const game = await Game.create({
-      name,
+      name: name || `${username}'s Game`,
       maxPlayers,
       isPrivate,
       password,
       winCondition,
-      creatorId: user.id
+      creatorId: userId,
+      creatorName: username
     });
 
     // Add creator as first player
-    const role = req.body.role || user.preferredRole || 'Techno Monk';
+    const role = req.body.role || 'time_traveler';
     await GamePlayer.create({
       GameId: game.id,
-      UserId: user.id,
-      role
+      UserId: userId,
+      username,
+      role,
+      isGuest: !req.user?.id
     });
+
+    // Add guest user to response if needed
+    const userData = req.user ? req.user : { id: userId, username, isGuest: true };
 
     res.status(201).json({
       success: true,
       message: 'Game created successfully',
-      data: { game }
+      data: { 
+        game,
+        user: userData
+      }
     });
   } catch (error) {
     next(error);
@@ -160,48 +172,53 @@ const joinGame = async (req, res, next) => {
       });
     }
 
-    // Check if game is joinable
-    if (game.status !== 'waiting') {
-      return res.status(400).json({
-        success: false,
-        message: 'Game has already started or ended'
-      });
-    }
-
     // Check if game is full
-    if (game.players.length >= game.maxPlayers) {
+    const playerCount = await GamePlayer.count({ where: { GameId: id } });
+    if (playerCount >= game.maxPlayers) {
       return res.status(400).json({
         success: false,
         message: 'Game is full'
       });
     }
 
-    // Check if user is already in the game
-    if (game.players.some(player => player.id === user.id)) {
-      return res.status(400).json({
-        success: false,
-        message: 'You are already in this game'
+    // Check if already in game (for authenticated users)
+    if (req.user) {
+      const existingPlayer = await GamePlayer.findOne({
+        where: { GameId: id, UserId: userId }
       });
+
+      if (existingPlayer) {
+        return res.status(400).json({
+          success: false,
+          message: 'Already in this game'
+        });
+      }
     }
 
-    // Check password for private games
-    if (game.isPrivate && game.password !== password) {
-      return res.status(401).json({
-        success: false,
-        message: 'Incorrect password'
-      });
-    }
-
-    // Add user to game
+    // Add player to game
     await GamePlayer.create({
-      GameId: game.id,
-      UserId: user.id,
-      role: role || user.preferredRole || 'Techno Monk'
+      GameId: id,
+      UserId: userId,
+      username,
+      role: role || 'time_traveler',
+      isGuest: !req.user?.id
     });
+
+    // Update player count
+    await game.update({
+      playerCount: playerCount + 1
+    });
+
+    // Add guest user to response if needed
+    const userData = req.user ? req.user : { id: userId, username, isGuest: true };
 
     res.status(200).json({
       success: true,
-      message: 'Joined game successfully'
+      message: 'Joined game successfully',
+      data: { 
+        game,
+        user: userData
+      }
     });
   } catch (error) {
     next(error);
