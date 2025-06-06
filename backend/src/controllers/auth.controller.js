@@ -34,14 +34,26 @@ const generateToken = (user) => {
  * @param {Function} next - Express next function
  */
 const register = async (req, res, next) => {
+  const transaction = await sequelize.transaction();
+  
   try {
     const { username, email, password, preferredRole } = req.body;
 
-    logger.info(`Attempting to register user: ${username}, ${email}`);
+    logger.info(`Attempting to register user: ${username}, ${email}`, { requestId: req.requestId });
+
+    // Validate required fields
+    if (!username || !email || !password) {
+      await transaction.rollback();
+      return res.status(400).json({
+        success: false,
+        message: 'Username, email, and password are required'
+      });
+    }
 
     // Check if User model is available
     if (!User) {
-      logger.error('User model is not defined');
+      await transaction.rollback();
+      logger.error('User model is not defined', { requestId: req.requestId });
       return res.status(500).json({
         success: false,
         message: 'Internal server error: User model not available'
@@ -49,67 +61,81 @@ const register = async (req, res, next) => {
     }
 
     // Check if user already exists
-    try {
-      const Op = require('sequelize').Op;
-      const existingUser = await User.findOne({ 
-        where: { 
-          [Op.or]: [{ username }, { email }] 
-        } 
-      });
+    const Op = require('sequelize').Op;
+    const existingUser = await User.findOne({ 
+      where: { 
+        [Op.or]: [{ username }, { email }] 
+      },
+      transaction
+    });
 
-      if (existingUser) {
-        return res.status(409).json({
-          success: false,
-          message: 'Username or email already exists'
-        });
-      }
-    } catch (err) {
-      logger.error('Error checking for existing user:', err);
-      return res.status(500).json({
+    if (existingUser) {
+      await transaction.rollback();
+      return res.status(409).json({
         success: false,
-        message: 'Error checking for existing user'
+        message: 'Username or email already exists'
       });
     }
 
     // Create new user
-    try {
-      const user = await User.create({
-        username,
-        email,
-        password,
-        preferredRole
-      });
+    const user = await User.create({
+      username,
+      email,
+      password,
+      preferredRole: preferredRole || 'time_traveler' // Default role if not provided
+    }, { transaction });
 
-      // Generate token
-      const token = generateToken(user);
+    // Commit the transaction
+    await transaction.commit();
 
-      // Return user info and token
-      return res.status(201).json({
-        success: true,
-        message: 'User registered successfully',
-        data: {
-          user: {
-            id: user.id,
-            username: user.username,
-            email: user.email,
-            role: user.role,
-            preferredRole: user.preferredRole
-          },
-          token
-        }
-      });
-    } catch (err) {
-      logger.error('Error creating user:', err);
-      return res.status(500).json({
+    // Generate token
+    const token = generateToken(user);
+
+    // Return user info and token
+    return res.status(201).json({
+      success: true,
+      message: 'User registered successfully',
+      data: {
+        user: {
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          role: user.role,
+          preferredRole: user.preferredRole || 'time_traveler',
+          profilePicture: user.profilePicture,
+          karmaScore: user.karmaScore || 0,
+          totalGamesPlayed: user.totalGamesPlayed || 0,
+          totalWins: user.totalWins || 0
+        },
+        token
+      }
+    });
+  } catch (err) {
+    // Rollback transaction in case of error
+    if (transaction && transaction.finished !== 'commit') {
+      await transaction.rollback();
+    }
+    
+    // Log the error
+    logger.error('Registration error:', { 
+      error: err.message, 
+      stack: err.stack,
+      requestId: req.requestId 
+    });
+    
+    // Handle specific error types
+    if (err.name === 'SequelizeValidationError' || err.name === 'SequelizeUniqueConstraintError') {
+      return res.status(400).json({
         success: false,
-        message: 'Error creating user'
+        message: 'Validation error',
+        errors: err.errors ? err.errors.map(e => e.message) : [err.message]
       });
     }
-  } catch (error) {
-    logger.error('Unhandled error in register function:', error);
+    
+    // Default error response
     return res.status(500).json({
       success: false,
-      message: 'Internal server error'
+      message: 'Failed to register user. Please try again later.'
     });
   }
 };
@@ -124,15 +150,35 @@ const login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
+    // Validate input
+    if (!username || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'Username and password are required'
+      });
+    }
+
+    logger.info(`Login attempt for user: ${username}`, { requestId: req.requestId });
+
     // Find user by username
     const user = await User.findOne({ 
       where: { username } 
     });
 
     if (!user) {
+      logger.warn('Login failed: User not found', { username, requestId: req.requestId });
       return res.status(401).json({
         success: false,
         message: 'Invalid username or password'
+      });
+    }
+
+    // Check if user is active
+    if (user.isActive === false) {
+      logger.warn('Login failed: User account is inactive', { username, requestId: req.requestId });
+      return res.status(403).json({
+        success: false,
+        message: 'Account is inactive. Please contact support.'
       });
     }
 
@@ -140,6 +186,7 @@ const login = async (req, res, next) => {
     const isMatch = await user.comparePassword(password);
 
     if (!isMatch) {
+      logger.warn('Login failed: Invalid password', { username, requestId: req.requestId });
       return res.status(401).json({
         success: false,
         message: 'Invalid username or password'
@@ -147,10 +194,13 @@ const login = async (req, res, next) => {
     }
 
     // Update last login
-    await user.updateLastLogin();
+    user.lastLogin = new Date();
+    await user.save();
 
     // Generate token
     const token = generateToken(user);
+
+    logger.info('Login successful', { username, userId: user.id, requestId: req.requestId });
 
     // Return user info and token
     res.status(200).json({
@@ -162,17 +212,27 @@ const login = async (req, res, next) => {
           username: user.username,
           email: user.email,
           role: user.role,
-          preferredRole: user.preferredRole,
+          preferredRole: user.preferredRole || 'time_traveler',
           profilePicture: user.profilePicture,
-          karmaScore: user.karmaScore,
-          totalGamesPlayed: user.totalGamesPlayed,
-          totalWins: user.totalWins
+          karmaScore: user.karmaScore || 0,
+          totalGamesPlayed: user.totalGamesPlayed || 0,
+          totalWins: user.totalWins || 0
         },
         token
       }
     });
   } catch (error) {
-    next(error);
+    logger.error('Login error:', { 
+      error: error.message, 
+      stack: error.stack,
+      username: req.body.username,
+      requestId: req.requestId 
+    });
+    
+    res.status(500).json({
+      success: false,
+      message: 'An error occurred during login. Please try again.'
+    });
   }
 };
 

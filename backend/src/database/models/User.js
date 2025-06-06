@@ -45,6 +45,22 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM('user', 'admin'),
       defaultValue: 'user'
     },
+    profilePicture: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    karmaScore: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    totalGamesPlayed: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    totalWins: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
     lastLogin: {
       type: DataTypes.DATE,
       allowNull: true
@@ -52,6 +68,22 @@ module.exports = (sequelize) => {
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
+    },
+    profilePicture: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    karmaScore: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    totalGamesPlayed: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    totalWins: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
     }
   }, {
     timestamps: true,
