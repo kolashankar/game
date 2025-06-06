@@ -1,12 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
 /**
  * Home page component
  */
 const HomePage: React.FC = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
+  const navigate = useNavigate();
+
+  // If already authenticated (including guest), redirect to dashboard
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className="space-y-16">
@@ -22,21 +30,19 @@ const HomePage: React.FC = () => {
           to shape civilizations across alternate futures.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          {isAuthenticated ? (
-            <Link to="/dashboard" className="btn-primary text-lg px-8 py-3">
-              Go to Dashboard
-            </Link>
-          ) : (
-            <>
-              <Link to="/register" className="btn-primary text-lg px-8 py-3">
-                Join the Game
-              </Link>
-              <Link to="/login" className="btn-outline-primary text-lg px-8 py-3">
-                Login
-              </Link>
-            </>
-          )}
+        <Link to="/dashboard" className="btn-primary text-lg px-8 py-3">
+          Play as Guest
+        </Link>
+        <div className="hidden sm:block border-l border-gray-700 mx-2"></div>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Link to="/login" className="btn-outline-primary text-lg px-8 py-3">
+            Login
+          </Link>
+          <Link to="/register" className="btn-outline-primary text-lg px-8 py-3">
+            Create Account
+          </Link>
         </div>
+      </div>
       </section>
 
       {/* Game features */}

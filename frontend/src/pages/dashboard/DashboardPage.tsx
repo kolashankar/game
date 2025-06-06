@@ -40,15 +40,41 @@ const DashboardPage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-display font-bold">Dashboard</h1>
-          <p className="text-gray-400 mt-2">Welcome back, {user?.username}</p>
+          <h1 className="text-3xl font-display font-bold">
+            {user?.isGuest ? 'Guest Dashboard' : 'Dashboard'}
+          </h1>
+          <p className="text-gray-400 mt-2">
+            {user?.isGuest 
+              ? `Playing as ${user.username} (Guest)` 
+              : `Welcome back, ${user?.username}`}
+            {user?.isGuest && (
+              <span className="ml-2 text-xs bg-tech-900 text-tech-400 px-2 py-1 rounded">
+                Guest Account
+              </span>
+            )}
+          </p>
+          {user?.isGuest && (
+            <div className="mt-2 text-sm text-yellow-400">
+              Guest accounts are temporary. Create an account to save your progress.
+            </div>
+          )}
         </div>
-        <button
-          onClick={() => setIsCreateModalOpen(true)}
-          className="btn-primary"
-        >
-          Create New Game
-        </button>
+        <div className="flex flex-col sm:flex-row gap-3">
+          {user?.isGuest && (
+            <Link 
+              to="/register" 
+              className="btn-outline-primary whitespace-nowrap"
+            >
+              Create Account
+            </Link>
+          )}
+          <button
+            onClick={() => setIsCreateModalOpen(true)}
+            className="btn-primary whitespace-nowrap"
+          >
+            Create New Game
+          </button>
+        </div>
       </div>
 
       {/* Player stats card */}

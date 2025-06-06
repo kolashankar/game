@@ -41,23 +41,40 @@ const GameLobbyPage: React.FC = () => {
   }, [gameId, fetchGameById]);
 
   // Check if current user is already in the game
-  const isUserInGame = currentGame?.players.some(player => player.id === user?.id);
+  const isUserInGame = currentGame?.players?.some(player => 
+    user?.isGuest 
+      ? player.id === localStorage.getItem('guestId')
+      : player.id === user?.id
+  ) || false;
 
   // Check if current user is the game creator
-  const isCreator = currentGame?.creator.id === user?.id;
+  const isCreator = user?.isGuest
+    ? localStorage.getItem('guestId') === currentGame?.creatorId
+    : currentGame?.creatorId === user?.id;
 
   // Check if game can be started
-  const canStartGame = isCreator && currentGame?.players.length >= 2;
+  const canStartGame = isCreator && (currentGame?.players?.length || 0) >= 2;
 
   // Handle joining the game
   const handleJoinGame = async () => {
-    if (!gameId || !selectedRole) return;
-    
-    setIsJoining(true);
+    if (!selectedRole) {
+      alert('Please select a role');
+      return;
+    }
+
+    if (!gameId) {
+      alert('No game ID provided');
+      return;
+    }
+
     try {
+      setIsJoining(true);
       await joinGame(gameId, selectedRole);
-    } catch (error) {
+      // Refresh game data after joining
+      await fetchGameById(gameId);
+    } catch (error: any) {
       console.error('Failed to join game:', error);
+      alert(error.message || 'Failed to join game. Please try again.');
     } finally {
       setIsJoining(false);
     }
@@ -80,14 +97,16 @@ const GameLobbyPage: React.FC = () => {
 
   // Handle starting the game
   const handleStartGame = async () => {
-    if (!gameId) return;
-    
-    setIsStarting(true);
+    if (!canStartGame || !gameId) return;
+
     try {
+      setIsStarting(true);
       await startGame(gameId);
+      // Navigate to game board when game starts
       navigate(`/games/${gameId}/board`);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to start game:', error);
+      alert(error.message || 'Failed to start game. Please try again.');
     } finally {
       setIsStarting(false);
     }

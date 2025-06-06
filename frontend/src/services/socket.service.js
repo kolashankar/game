@@ -14,8 +14,9 @@ export const initSocket = (token) => {
     socket.close();
   }
 
-  // Create new socket connection
-  socket = io(import.meta.env.VITE_SOCKET_URL || 'https://game-ujiz.onrender.com', {
+  // Create new socket connection with fallback URL
+  const socketUrl = (import.meta.env && import.meta.env.VITE_SOCKET_URL) || 'https://game-ujiz.onrender.com';
+  socket = io(socketUrl, {
     auth: {
       token
     },

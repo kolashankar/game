@@ -16,7 +16,7 @@ const ProfilePage = lazy(() => import('./pages/profile/ProfilePage'));
 const LeaderboardPage = lazy(() => import('./pages/leaderboard/LeaderboardPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
-// Protected route component
+// Protected route component - now allows guests
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const { isAuthenticated, loading } = useAuth();
 
@@ -24,20 +24,30 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     return <LoadingScreen />;
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
-
+  // Allow both authenticated users and guests to access protected routes
   return children;
 };
 
 const App = () => {
-  const { checkAuth } = useAuth();
+  const { checkAuth, isAuthenticated, loading, loginAsGuest } = useAuth();
 
   // Check authentication status on app load
   useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
+    const initializeAuth = async () => {
+      await checkAuth();
+      
+      // If not authenticated, automatically log in as guest
+      if (!isAuthenticated && !loading) {
+        try {
+          await loginAsGuest();
+        } catch (error) {
+          console.error('Failed to login as guest:', error);
+        }
+      }
+    };
+    
+    initializeAuth();
+  }, [checkAuth, isAuthenticated, loading, loginAsGuest]);
 
   return (
     <Suspense fallback={<LoadingScreen />}>

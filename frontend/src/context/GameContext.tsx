@@ -15,6 +15,8 @@ export interface Game {
   isPrivate: boolean;
   winCondition: string;
   globalKarma: number;
+  creatorId: string;
+  creatorName: string;
   creator: {
     id: string;
     username: string;
@@ -26,6 +28,8 @@ export interface Game {
   endedAt?: string;
   createdAt: string;
   updatedAt: string;
+  startingEra?: string;
+  description?: string;
 }
 
 export interface GamePlayer {
@@ -146,7 +150,9 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       const token = localStorage.getItem('token');
       
       if (token) {
-        const socketInstance = io(import.meta.env.VITE_SOCKET_URL || 'https://game-ujiz.onrender.com', {
+        // Safely get socket URL from environment with fallback
+        const socketUrl = (import.meta as any).env?.VITE_SOCKET_URL || 'https://game-ujiz.onrender.com';
+        const socketInstance = io(socketUrl, {
           auth: { token }
         });
         
@@ -189,12 +195,11 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
   const fetchGames = useCallback(async () => {
     try {
       setLoading(true);
-      setError(null);
-      
-      const data = await gameService.getGames();
-      setGames(data.games);
-    } catch (error: any) {
-      setError(error.message || 'Failed to fetch games');
+      const response = await gameService.getGames();
+      const validGames = response.games?.filter((game): game is Game => game !== null) || [];
+      setGames(validGames);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'Failed to fetch games');
     } finally {
       setLoading(false);
     }
@@ -206,39 +211,47 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       setLoading(true);
       setError(null);
       
-      const data = await gameService.getGameById(gameId);
-      setCurrentGame(data.game);
-      
-      // Join game room via socket if connected
-      if (socket && socket.connected) {
-        socket.emit('join-game', gameId);
+      const response = await gameService.getGameById(gameId);
+      if (response?.game) {
+        setCurrentGame(response.game);
+        
+        // Join the game room via socket
+        if (socket?.connected) {
+          socket.emit('join-game', gameId);
+        }
+      } else {
+        throw new Error('Game not found');
       }
-    } catch (error: any) {
-      setError(error.message || 'Failed to fetch game');
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'Failed to fetch game');
+      setCurrentGame(null);
+      throw error;
     } finally {
       setLoading(false);
     }
   }, [socket]);
 
   // Create a new game
-  const createGame = async (gameData: any) => {
+  const createGame = useCallback(async (gameData: any): Promise<Game> => {
     try {
       setLoading(true);
       setError(null);
       
-      const data = await gameService.createGame(gameData);
+      const response = await gameService.createGame(gameData);
+      if (!response?.game) {
+        throw new Error('Failed to create game: No game data returned');
+      }
       
-      // Add the new game to the list
-      setGames((prev) => [...prev, data.game]);
-      
-      return data.game;
-    } catch (error: any) {
-      setError(error.message || 'Failed to create game');
-      throw error;
+      setGames(prevGames => [...prevGames, response.game].filter((g): g is Game => g !== null));
+      return response.game;
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to create game';
+      setError(errorMessage);
+      throw new Error(errorMessage);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // Join a game
   const joinGame = async (gameId: string, role: string, password?: string) => {

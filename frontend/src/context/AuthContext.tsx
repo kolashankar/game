@@ -5,13 +5,14 @@ import { authService } from '../services/authService';
 export interface User {
   id: string;
   username: string;
-  email: string;
+  email?: string;
   role: string;
   preferredRole?: string;
   profilePicture?: string;
-  karmaScore: number;
-  totalGamesPlayed: number;
-  totalWins: number;
+  karmaScore?: number;
+  totalGamesPlayed?: number;
+  totalWins?: number;
+  isGuest?: boolean;
 }
 
 // Define the AuthContext type
@@ -22,6 +23,7 @@ interface AuthContextType {
   error: string | null;
   login: (username: string, password: string) => Promise<void>;
   register: (username: string, email: string, password: string, preferredRole?: string) => Promise<void>;
+  loginAsGuest: () => Promise<void>;
   logout: () => void;
   checkAuth: () => Promise<void>;
   clearError: () => void;
@@ -52,19 +54,45 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
+      const guestId = localStorage.getItem('guestId');
       
-      if (!token) {
-        setIsAuthenticated(false);
-        setUser(null);
+      // If we have a token, try to authenticate as a regular user
+      if (token) {
+        try {
+          const userData = await authService.getProfile();
+          setUser({ ...userData.user, isGuest: false });
+          setIsAuthenticated(true);
+          return;
+        } catch (error) {
+          console.error('Failed to authenticate with token:', error);
+          localStorage.removeItem('token');
+        }
+      }
+      
+      // If we have a guest ID, restore guest session
+      if (guestId) {
+        const guestUsername = localStorage.getItem('guestUsername') || `Guest-${Math.floor(Math.random() * 10000)}`;
+        setUser({
+          id: guestId,
+          username: guestUsername,
+          role: 'guest',
+          isGuest: true,
+          karmaScore: 0,
+          totalGamesPlayed: 0,
+          totalWins: 0
+        });
+        setIsAuthenticated(true);
         return;
       }
       
-      const userData = await authService.getProfile();
-      setUser(userData.user);
-      setIsAuthenticated(true);
+      // No valid session found
+      setIsAuthenticated(false);
+      setUser(null);
     } catch (error) {
       console.error('Authentication check failed:', error);
       localStorage.removeItem('token');
+      localStorage.removeItem('guestId');
+      localStorage.removeItem('guestUsername');
       setIsAuthenticated(false);
       setUser(null);
     } finally {
@@ -84,7 +112,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem('token', data.token);
       
       // Set user data and authentication state
-      setUser(data.user);
+      setUser({ ...data.user, isGuest: false });
       setIsAuthenticated(true);
     } catch (error: any) {
       setError(error.message || 'Login failed. Please try again.');
@@ -93,6 +121,42 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setLoading(false);
     }
   };
+
+  // Login as guest function
+  const loginAsGuest = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      // Generate a guest user
+      const guestId = `guest-${Date.now()}`;
+      const guestUsername = `Guest-${Math.floor(Math.random() * 10000)}`;
+      
+      const guestUser: User = {
+        id: guestId,
+        username: guestUsername,
+        role: 'guest',
+        isGuest: true,
+        karmaScore: 0,
+        totalGamesPlayed: 0,
+        totalWins: 0
+      };
+      
+      // Store guest info in localStorage
+      localStorage.setItem('guestId', guestId);
+      localStorage.setItem('guestUsername', guestUsername);
+      
+      // Set guest user data and authentication state
+      setUser(guestUser);
+      setIsAuthenticated(true);
+    } catch (error: any) {
+      setError('Failed to login as guest. Please try again.');
+      console.error('Guest login error:', error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   // Register function
   const register = async (username: string, email: string, password: string, preferredRole?: string) => {
@@ -117,11 +181,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // Logout function
-  const logout = () => {
+  const logout = useCallback(() => {
     localStorage.removeItem('token');
+    localStorage.removeItem('guestId');
+    localStorage.removeItem('guestUsername');
     setUser(null);
     setIsAuthenticated(false);
-  };
+  }, []);
 
   // Clear error function
   const clearError = () => {
@@ -137,6 +203,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         error,
         login,
         register,
+        loginAsGuest,
         logout,
         checkAuth,
         clearError,
