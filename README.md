@@ -71,10 +71,10 @@ Create the following `.env` files for each component:
 PORT=5000
 JWT_SECRET=
 MONGODB_URI=
-POSTGRES_DB=postgres
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=root
-POSTGRES_HOST=localhost
+POSTGRES_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_HOST=
 AI_ENGINE_URL=https://game-ai-engine.onrender.com
 ```
 

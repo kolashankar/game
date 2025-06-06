@@ -46,9 +46,9 @@ PINECONE_ENVIRONMENT=your_pinecone_environment_here
 JWT_SECRET=generate_a_strong_secret_key_here
 
 # Database Credentials (Optional - defaults are set in docker-compose.yml)
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=root
-POSTGRES_DB=postgres
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_DB=
 
 # Deployment Settings
 NODE_ENV=production
