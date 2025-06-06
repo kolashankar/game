@@ -20,6 +20,8 @@ if (process.env.DATABASE_URL) {
     }
   });
 } else {
+  
+  //no need to change anything beacuse the render.com only takes the url
   // Use individual connection parameters
   logger.info('Using individual parameters for PostgreSQL connection');
   sequelize = new Sequelize(
